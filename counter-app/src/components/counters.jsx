@@ -1,20 +1,29 @@
-import React, { Component } from 'react';
-import Counter from './counter';
+import React, { Component } from 'react'
+import Counter from './counter'
 
 class Counters extends Component {
-    state = { 
-        counters:[
-            {id:1,value:1},
-            {id:2,value:2},
-            {id:3,value:3},
-            {id:4,value:4}
-        ]
-     }
-    render() { 
-        return (<div> {this.state.counters.map(counter =><Counter key={counter.id} value={counter.value}/>)}
-            </div>
-            );
-    }
+  render() {
+    const { counters, onIncrement, OnDelete } = this.props
+    return (
+      <div>
+        <button
+          className="btn btn-primary btn-sm m-2"
+          onClick={this.props.onReset}
+        >
+          Reset{' '}
+        </button>
+        {counters.map((counter) => (
+          <Counter
+            key={counter.id}
+            onIncrement={onIncrement}
+            onDecrement={this.props.onDecrement}
+            OnDelete={OnDelete}
+            counter={counter}
+          />
+        ))}
+      </div>
+    )
+  }
 }
- 
-export default Counters;
+
+export default Counters
